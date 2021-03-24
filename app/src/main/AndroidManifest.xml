@@ -14,6 +14,7 @@
         android:theme="@style/Theme.FlaskClient"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ChatScreen"></activity>
         <activity android:name=".DashBoard" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -2,6 +2,8 @@ package com.example.flaskclient;
 
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -16,10 +18,10 @@ import okhttp3.Response;
 public class ServerConnection {
 
     private String url;
-    private MainActivity mainActivity;
+    private AppCompatActivity activity;
 
-    public ServerConnection(MainActivity activityInstance, String url) {
-        mainActivity = activityInstance;
+    public ServerConnection(AppCompatActivity activityInstance, String url) {
+        activity = activityInstance;
         this.url = url;
     }
 
@@ -47,10 +49,10 @@ public class ServerConnection {
         okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(final Call call, final IOException e) {
-                mainActivity.runOnUiThread(new Runnable() {
+                activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(mainActivity, "Something went wrong:" + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, "Something went wrong:" + " " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         call.cancel();
                     }
                 });
