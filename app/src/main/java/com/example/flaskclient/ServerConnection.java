@@ -25,12 +25,14 @@ public class ServerConnection {
 
     public void registerUser(User user) {
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
+        httpBuilder.addQueryParameter("type", "register");
         httpBuilder.addQueryParameter("name", user.getName());
         postRequest(httpBuilder);
     }
 
     public void sendMessage(User user, String message) {
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
+        httpBuilder.addQueryParameter("type", "response");
         httpBuilder.addQueryParameter("name", user.getName());
         httpBuilder.addQueryParameter("message", message);
         postRequest(httpBuilder);
