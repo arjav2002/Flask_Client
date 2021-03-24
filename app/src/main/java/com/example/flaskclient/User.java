@@ -1,6 +1,9 @@
 package com.example.flaskclient;
 
-public class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class User implements Parcelable {
 
     private String name, address, phno, dad, mom, emcon, guardian, age;
 
@@ -14,6 +17,46 @@ public class User {
         this.guardian = guardian;
         this.age = age;
     }
+
+    protected User(Parcel in) {
+        name = in.readString();
+        address = in.readString();
+        phno = in.readString();
+        dad = in.readString();
+        mom = in.readString();
+        emcon = in.readString();
+        guardian = in.readString();
+        age = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(address);
+        dest.writeString(phno);
+        dest.writeString(dad);
+        dest.writeString(mom);
+        dest.writeString(emcon);
+        dest.writeString(guardian);
+        dest.writeString(age);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public String getName() {
         return name;
