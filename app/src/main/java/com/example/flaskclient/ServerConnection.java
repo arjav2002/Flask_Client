@@ -35,23 +35,21 @@ public class ServerConnection {
         httpBuilder.addQueryParameter("age", user.getAge());
         httpBuilder.addQueryParameter("dad", user.getDad());
         httpBuilder.addQueryParameter("mom", user.getMom());
-        httpBuilder.addQueryParameter("mom", user.getEmcon());
+        httpBuilder.addQueryParameter("emcon", user.getEmcon());
         httpBuilder.addQueryParameter("guardian", user.getGuardian());
         httpBuilder.addQueryParameter("phno", user.getPhno());
 
         postRequest(httpBuilder);
     }
 
-    public String sendMessage(User user, String message) {
+    public synchronized String sendMessage(User user, String message) {
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("type", "response");
         httpBuilder.addQueryParameter("name", user.getName());
         httpBuilder.addQueryParameter("message", message);
         postRequest(httpBuilder);
         waiting = true;
-        while(waiting){
-            System.out.println("waiting");
-        }
+        while(waiting);
         return responseString;
     }
 

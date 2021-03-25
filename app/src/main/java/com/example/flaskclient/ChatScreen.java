@@ -2,7 +2,9 @@ package com.example.flaskclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +36,17 @@ public class ChatScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!msg.getText().toString().isEmpty()) {
-                    serverConnection.sendMessage(user, msg.getText().toString());
+                    String responseString = serverConnection.sendMessage(user, msg.getText().toString());
+                    try {
+                        String[] latlng = responseString.split(", ");
+                        double lat = Double.parseDouble(latlng[0]);
+                        double lng = Double.parseDouble(latlng[1]);
+                        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                                Uri.parse("http://maps.google.com/maps?daddr=" + lat + "," + lng));
+                        startActivity(intent);
+                    } catch(Exception e) {
+                        response.setText(responseString);
+                    }
                 }
             }
         });
