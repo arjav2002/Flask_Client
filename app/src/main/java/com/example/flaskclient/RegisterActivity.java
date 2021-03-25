@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setUser();
+
             }
         });
 
@@ -71,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         User user = new User(name,address,phoneNo,dadName,momName,emContact,guardianName,userAge);
+
+        serverConnection.registerUser(user);
 
         Intent intent = new Intent(RegisterActivity.this,ChatScreen.class);
         intent.putExtra("user", user);

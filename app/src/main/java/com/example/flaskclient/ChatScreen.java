@@ -2,6 +2,7 @@ package com.example.flaskclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +24,12 @@ public class ChatScreen extends AppCompatActivity {
         send = (Button)findViewById(R.id.send);
         msg = (EditText)findViewById(R.id.message);
         response = (TextView) findViewById(R.id.response);
-        serverConnection = new ServerConnection(this, "http://" + "192.168.0.102" + ":" + 5000 + "/");
-        user = (User) getIntent().getSerializableExtra("user");
+
+        SharedPreferences pref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+        serverConnection = new ServerConnection(this, "http://" +pref.getString("ipv4","localhost")+ ":" + 5000 + "/");
+
+        user = (User) getIntent().getExtras().getParcelable("user");
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

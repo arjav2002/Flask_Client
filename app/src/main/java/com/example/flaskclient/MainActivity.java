@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         connect = findViewById(R.id.ipsubmitbtn);
-        ipv4Input = findViewById((R.id.ipInput));
+        ipv4Input = findViewById((R.id.inputIP));
         serverConnection = new ServerConnection(this, "http://" + ipv4Input.getText().toString() + ":" + 5000 + "/");
 
         connect.setOnClickListener(new View.OnClickListener() {

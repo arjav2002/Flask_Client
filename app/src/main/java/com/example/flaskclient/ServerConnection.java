@@ -49,7 +49,9 @@ public class ServerConnection {
         httpBuilder.addQueryParameter("message", message);
         postRequest(httpBuilder);
         waiting = true;
-        while(waiting);
+        while(waiting){
+            System.out.println("waiting");
+        }
         return responseString;
     }
 
