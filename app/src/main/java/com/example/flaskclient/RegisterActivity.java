@@ -3,6 +3,7 @@ package com.example.flaskclient;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -22,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText guardianf;
     EditText agef;
     Button submitbtn;
+    private ServerConnection serverConnection;
 
 
     @Override
@@ -38,6 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
         guardianf = findViewById((R.id.guardian));
         agef = findViewById((R.id.age));
         submitbtn = findViewById((R.id.submitbutton));
+
+        SharedPreferences pref = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+        serverConnection = new ServerConnection(this, "http://" +pref.getString("ipv4","localhost")+ ":" + 5000 + "/");
 
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
         guardianName = guardianf.getText().toString();
         userAge = agef.getText().toString();
 
-        if(!(name.isEmpty() || address.isEmpty() || phoneNo.isEmpty() || dadName.isEmpty() || momName.isEmpty() || emContact.isEmpty() || guardianName.isEmpty() || userAge.isEmpty() )){
+        if(name.isEmpty() || address.isEmpty() || phoneNo.isEmpty() || dadName.isEmpty() || momName.isEmpty() || emContact.isEmpty() || guardianName.isEmpty() || userAge.isEmpty()){
             return;
         }
 
@@ -69,10 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(RegisterActivity.this,ChatScreen.class);
         intent.putExtra("user", user);
         startActivity(intent);
-
-
-
-
-
+        finish();
     }
 }
