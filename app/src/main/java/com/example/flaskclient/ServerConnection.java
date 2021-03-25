@@ -17,6 +17,8 @@ public class ServerConnection {
 
     private String url;
     private MainActivity mainActivity;
+    private volatile boolean waiting;
+    private volatile String responseString;
 
     public ServerConnection(MainActivity activityInstance, String url) {
         mainActivity = activityInstance;
@@ -27,15 +29,25 @@ public class ServerConnection {
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("type", "register");
         httpBuilder.addQueryParameter("name", user.getName());
+        httpBuilder.addQueryParameter("address", user.getAddress());
+        httpBuilder.addQueryParameter("age", user.getAge());
+        httpBuilder.addQueryParameter("dad", user.getDad());
+        httpBuilder.addQueryParameter("mom", user.getMom());
+        httpBuilder.addQueryParameter("mom", user.getEmcon());
+        httpBuilder.addQueryParameter("guardian", user.getGuardian());
+        httpBuilder.addQueryParameter("phno", user.getPhno());
+
         postRequest(httpBuilder);
     }
 
-    public void sendMessage(User user, String message) {
+    public String sendMessage(User user, String message) {
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("type", "response");
-        httpBuilder.addQueryParameter("name", user.getName());
         httpBuilder.addQueryParameter("message", message);
         postRequest(httpBuilder);
+        waiting = true;
+        while(waiting);
+        return responseString;
     }
 
     private void postRequest(HttpUrl.Builder httpBuilder) {
@@ -58,7 +70,9 @@ public class ServerConnection {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                System.out.println(response.body().string());
+                responseString = response.body().string();
+                waiting = false;
+                System.out.println("Message response: " + responseString);
             }
         });
     }
