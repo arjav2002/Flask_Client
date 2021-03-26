@@ -133,10 +133,15 @@ public class RegisterActivity extends AppCompatActivity implements OnMapReadyCal
 
         serverConnection.registerUser(user);
 
+        SharedPreferences pref = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = pref.edit();
+
+        myEdit.putString("isSignedIn","true");
+        myEdit.commit();
+
         Intent intent = new Intent(RegisterActivity.this, ChatScreen.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        finish();
     }
 
     @Override

@@ -40,8 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 myEdit.putString("ipv4", ipv4Input.getText().toString());
                 myEdit.commit();
 
-                Intent intent = new Intent(MainActivity.this,DashBoard.class);
-                startActivity(intent);
+                String isSignedIn = sharedPreferences.getString("isSignedIn","false");
+                if(isSignedIn == "false"){
+                    Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Intent intent = new Intent(MainActivity.this,ChatScreen.class);
+                    startActivity(intent);
+                }
             }
         });
 
