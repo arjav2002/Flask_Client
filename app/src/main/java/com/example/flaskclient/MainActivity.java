@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 myEdit.putString("ipv4", ipv4Input.getText().toString());
                 myEdit.commit();
 
-                Intent intent = new Intent(MainActivity.this,DashBoard.class);
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
