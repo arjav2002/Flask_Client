@@ -160,11 +160,10 @@ public class RegisterActivity extends AppCompatActivity implements OnMapReadyCal
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    afterPermission();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    afterPermission();
                 }
                 return;
             }
