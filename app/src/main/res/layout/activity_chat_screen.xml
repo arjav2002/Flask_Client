@@ -10,15 +10,15 @@
         android:id="@+id/message"
         android:layout_width="279dp"
         android:layout_height="71dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="232dp"
-        android:background="#2196F3"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginBottom="328dp"
+        android:background="@color/white"
         android:ems="10"
         android:hint="Type something"
         android:inputType="textPersonName"
         android:padding="5dp"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textColorHint="#CDCBCB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -27,14 +27,12 @@
         android:id="@+id/send"
         android:layout_width="94dp"
         android:layout_height="67dp"
-        android:layout_marginStart="7dp"
-        android:layout_marginLeft="7dp"
         android:layout_marginBottom="236dp"
         android:text="Enter"
+        app:backgroundTint="#4CAF50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toEndOf="@+id/message" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/response"
